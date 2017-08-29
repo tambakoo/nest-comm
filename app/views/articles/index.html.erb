@@ -1,0 +1,22 @@
+<p>
+<% if user_signed_in? -%>
+<%= link_to 'Submit article', new_article_path %>
+<%= link_to 'Account settings', edit_user_registration_path %>
+<%= link_to 'Sign out', destroy_user_session_path, :method => :delete %>
+<% else -%>
+<%= link_to 'Sign up', new_user_registration_path %>
+<%= link_to 'Sign in', new_user_session_path %>
+<% end -%>
+</p>
+
+<strong><font size="5">Listing All Articles</font></strong><br>
+(click article to view)
+
+<ul>
+<% @articles.each do |article| %>
+	<li>
+	<%= link_to article.title, article%>
+	</li> 
+<% end %>
+<ul>
+

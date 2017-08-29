@@ -1,0 +1,21 @@
+<h1>
+<%= @article.title%>
+</h1>
+<p>
+	<%= @article.body%>
+</p>
+<small>Submitted <%= time_ago_in_words(@article.created_at) %> ago, by <%= @article.user.email %></small>
+<%= link_to "Back to articles" ,  articles_path %><br>
+<% if correct_user?(@article.user) %>
+	<small><%=link_to "delete article", @article, method: :delete %></small>
+<% end %>
+<h3><%= @article.comments.count %> comments</h3>
+
+<%= form_for [@article, Comment.new] do |f| %>
+<%= f.text_area :body, placeholder: "Add a comment" %><br/>
+<%= f.submit "Add Comment" %>
+<% end %>
+
+<ul>
+  <%= render(partial: 'comments/comment', collection: @article.comments) %>
+</ul>
